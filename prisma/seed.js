@@ -46,7 +46,7 @@ async function seed() {
   const createdTicket = await prisma.ticket.create({
     data: {
       customerId: createdCustomer.id,
-      screeningId: createdScreen.id,
+      screeningId: createdScreening.id,
     },
   });
 
