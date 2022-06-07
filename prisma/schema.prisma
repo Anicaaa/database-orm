@@ -14,6 +14,7 @@ model Customer {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   contact Contact?
+  ticket Ticket[]
 }
 
 model Contact {
@@ -44,6 +45,7 @@ model Screening {
   updatedAt DateTime @updatedAt
   screen  Screen? @relation(fields: [screenId], references: [id])
   screenId Int?
+  ticket Ticket[]
 }
 
 model Screen {
@@ -53,3 +55,14 @@ model Screen {
   updatedAt DateTime @updatedAt
   screening Screening[]
 }
+
+model Ticket {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  customer   Customer @relation(fields: [customerId], references: [id])
+  customerId Int
+  screening Screening @relation(fields: [screeningId], references: [id])
+  screeningId Int
+}
+
