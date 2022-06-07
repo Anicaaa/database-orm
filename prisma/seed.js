@@ -29,10 +29,17 @@ async function seed() {
     },
   });
 
+  const createdScreen = await prisma.screen.create({
+    data: {
+      number: 3,
+    },
+  });
+
   const createdScreening = await prisma.screening.create({
     data: {
-      movieId: 1,
-      startsAt: "1997-07-16T19:20:30.451Z",
+      movieId: createdMovie.id,
+      screenId: createdScreen.id,
+      startsAt: "2022-06-07T19:20:30.451Z",
     },
   });
 
@@ -45,3 +52,6 @@ seed().catch(async (error) => {
   await prisma.$disconnect();
   process.exit(1);
 });
+
+/* screen  Screen @relation(fields: [screenId], references: [id])
+  screenId Int */
